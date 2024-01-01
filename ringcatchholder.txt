@@ -1,0 +1,25 @@
+teeId = 33;
+pistonOd = 22;
+teeLen = 91;
+slotWidth = 10;
+slotLen = pistonOd+6;
+slotHeight = teeId;
+capLen = 10;
+capOd = teeId + 10;
+
+difference (r=0) {
+  union (r=0) {
+    // Main cylinder
+    cylinder(r=teeId/2, h=teeLen);
+    
+    // Cap
+    translate([0,0,teeLen])
+      cylinder(r=capOd/2, h=capLen);
+  }
+  // Hole for the piston
+  cylinder(r=pistonOd/2, h=teeLen+capLen);
+    
+  // Slot for the ring catch
+  translate([-slotLen/2, -slotHeight/2, teeLen/2 - slotWidth/2])
+    cube([slotLen, slotHeight, slotWidth]);
+}
